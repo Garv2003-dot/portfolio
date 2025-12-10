@@ -3,7 +3,16 @@ export interface Project {
   title: string
   subtitle: string
   description: string
-  techStack: string[]
+  problem: string
+  solution: string
+  links: {
+    live?: string
+    github?: string
+  }
+  techStack: {
+    category: string
+    items: string[]
+  }[]
   features: string[]
   challenges: { title: string; description: string }[]
   outcomes: string[]
@@ -14,8 +23,18 @@ export const projects: Project[] = [
     slug: "real-time-chat",
     title: "Real-Time Chat Application",
     subtitle: "WebSocket-based Communication Platform",
-    description: "A robust real-time messaging application enabling seamless two-way communication. Features include instant message delivery, user presence indicators, and intelligent bot interactions to enhance user engagement.",
-    techStack: ["React", "Node.js", "Socket.io", "Express", "MongoDB"],
+    description: "A robust real-time messaging application enabling seamless two-way communication.",
+    problem: "Traditional HTTP polling creates high latency and server load for chat applications, resulting in a poor user experience and inefficient resource usage.",
+    solution: "Implemented a WebSocket-based architecture using Socket.io to establish persistent, bidirectional communication channels, ensuring instant message delivery with minimal overhead.",
+    links: {
+      github: "https://github.com/Garv2003-dot" // Placeholder for now
+    },
+    techStack: [
+        { category: "Frontend", items: ["React", "Tailwind CSS"] },
+        { category: "Backend", items: ["Node.js", "Express"] },
+        { category: "Real-time", items: ["Socket.io"] },
+        { category: "Database", items: ["MongoDB"] }
+    ],
     features: [
       "Real-time bidirectional messaging using WebSockets",
       "Intelligent bot interaction for automated responses",
@@ -43,8 +62,18 @@ export const projects: Project[] = [
     slug: "air-writing",
     title: "Air Writing & OCR",
     subtitle: "Computer Vision Gesture Recognition",
-    description: "An innovative computer vision system that allows users to write in the air using hand gestures. The system tracks finger movements and uses machine learning models to classify and convert drawn characters into digital text.",
-    techStack: ["Python", "OpenCV", "TensorFlow", "Keras", "NumPy"],
+    description: "An innovative computer vision system that allows users to write in the air using hand gestures.",
+    problem: "Human-Computer Interaction typically requires physical contact devices or expensive hardware, limiting accessibility and natural interaction usage.",
+    solution: "Developed a computer vision system using MediaPipe and OpenCV to track finger movements in free space and machine learning models to classify the drawn gestures into digital text.",
+    links: {
+      github: "https://github.com/Garv2003-dot"
+    },
+    techStack: [
+        { category: "Core", items: ["Python"] },
+        { category: "Computer Vision", items: ["OpenCV", "MediaPipe"] },
+        { category: "Machine Learning", items: ["TensorFlow", "Keras"] },
+        { category: "Processing", items: ["NumPy"] }
+    ],
     features: [
       "Real-time hand gesture tracking",
       "Air-to-text character conversion",
