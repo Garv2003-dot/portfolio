@@ -2,39 +2,54 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Code, Database, Layout, Terminal, X, Cpu, Globe, Server, Layers } from "lucide-react"
+import { Code, Database, Layout, X, Server } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const techCategories = [
   {
     id: "frontend",
-    title: "Frontend & State",
+    title: "Frontend Ecosystem",
     icon: Layout,
     color: "from-pink-500 to-rose-500",
     description: "Building responsive, scalable interfaces and managing complex state.",
     philosophy: "I focus on component reusability and predictable state management.",
     skills: [
-      { name: "React.js", level: 95, detail: "Hooks, Custom Hooks, Performance", type: "Core" },
-      { name: "React Native", level: 90, detail: "Cross-platform Mobile Apps", type: "Core" },
-      { name: "Next.js", level: 90, detail: "SSR, App Router, Server Actions", type: "Skilled" },
-      { name: "Redux Toolkit", level: 92, detail: "State Slices, RTK Query", type: "Core" },
-      { name: "Tailwind CSS", level: 98, detail: "Responsive Design, Custom Themes", type: "Core" },
-      { name: "Context API", level: 85, detail: "Global State, Theme Management", type: "Skilled" },
+      { name: "React.js", detail: "Hooks, Custom Hooks, Performance" },
+      { name: "Next.js", detail: "SSR, App Router, Server Actions" },
+      { name: "React Native", detail: "Cross-platform Mobile Apps" },
+      { name: "Tailwind CSS", detail: "Responsive Design, Custom Themes" },
+      { name: "Redux Toolkit", detail: "State Slices, RTK Query" },
+      { name: "Zustand", detail: "Minimalist State Management" },
     ]
   },
   {
     id: "backend",
-    title: "Backend & Database",
+    title: "Backend & AI Integration",
     icon: Server,
     color: "from-purple-500 to-indigo-500",
-    description: "Architecting secure server-side logic and efficient data storage.",
-    philosophy: "Robust APIs and normalized data structures are my priority.",
+    description: "Architecting secure server-side logic and custom AI workflows.",
+    philosophy: "Robust APIs and AI-driven automation are my priority.",
     skills: [
-      { name: "Node.js", level: 85, detail: "Runtime, Event Loop", type: "Skilled" },
-      { name: "Express", level: 88, detail: "REST APIs, Middleware", type: "Skilled" },
-      { name: "PostgreSQL", level: 80, detail: "Relational Data, Complex Queries", type: "Skilled" },
-      { name: "Supabase", level: 90, detail: "Auth, Realtime, Storage", type: "Comfortable" },
-      { name: "Python", level: 85, detail: "FastAPI, Data Structures", type: "Skilled" },
+      { name: "Node.js", detail: "Runtime, Event Loop" },
+      { name: "Express", detail: "REST APIs, Middleware" },
+      { name: "LLM Orchestration", detail: "OpenAI, Anthropic, Gemini" },
+      { name: "AI Automation", detail: "Intent Parsing, Agentic Workflows" },
+    ]
+  },
+  {
+    id: "infrastructure",
+    title: "Database & Infrastructure",
+    icon: Database,
+    color: "from-cyan-500 to-blue-500",
+    description: "Efficient data storage and deployment pipelines.",
+    philosophy: "Streamlined workflows ensure rapid and reliable delivery.",
+    skills: [
+      { name: "PostgreSQL", detail: "Relational Data, Complex Queries" },
+      { name: "Supabase", detail: "Auth, Realtime, Storage" },
+      { name: "Vercel", detail: "High-speed Delivery, Edge-caching" },
+      { name: "Docker", detail: "Containerization" },
+      { name: "Turborepo", detail: "Monorepo Architecture" },
+      { name: "Git", detail: "Version Control" },
     ]
   },
   {
@@ -45,23 +60,9 @@ const techCategories = [
     description: "The core languages that power my development stack.",
     philosophy: "Strong typing and clean syntax lead to maintainable code.",
     skills: [
-      { name: "JavaScript", level: 95, detail: "ES6+, Async/Await, DOM", type: "Core" },
-      { name: "TypeScript", level: 90, detail: "Static Typing, Interfaces", type: "Core" },
-      { name: "Python", level: 85, detail: "DSA, Scripting, Automation", type: "Skilled" },
-    ]
-  },
-  {
-    id: "tools",
-    title: "Tools & DevOps",
-    icon: Terminal,
-    color: "from-cyan-500 to-blue-500",
-    description: "Essential tools for version control, design, and deployment.",
-    philosophy: "Streamlined workflows ensure rapid and reliable delivery.",
-    skills: [
-      { name: "Git", level: 95, detail: "Version Control, Branching", type: "Core" },
-      { name: "Azure", level: 75, detail: "Cloud Services, Deployment", type: "Comfortable" },
-      { name: "Figma", level: 80, detail: "UI Design, Prototyping", type: "Skilled" },
-      { name: "Postman", level: 90, detail: "API Testing, Documentation", type: "Skilled" },
+      { name: "JavaScript", detail: "ES6+, Async/Await, DOM" },
+      { name: "TypeScript", detail: "Static Typing, Interfaces" },
+      { name: "Python", detail: "DSA, Scripting, Automation" },
     ]
   }
 ]
@@ -144,36 +145,22 @@ export function TechExplosion() {
                           </button>
                         </div>
 
-                        <div className="space-y-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           {category.skills.map((skill, index) => (
                             <motion.div
                               key={skill.name}
-                              initial={{ opacity: 0, x: 20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: index * 0.1 }}
+                              initial={{ opacity: 0, scale: 0.95 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: index * 0.05 }}
+                              className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all hover:bg-white/10"
                             >
-                              <div className="flex justify-between mb-2">
-                                <div className="flex items-center gap-2">
-                                  <span className="font-medium text-neutral-200">{skill.name}</span>
-                                  <span className={`text-[10px] px-2 py-0.5 rounded-full border ${
-                                    skill.type === 'Core' ? 'border-pink-500/50 text-pink-400 bg-pink-500/10' :
-                                    skill.type === 'Skilled' ? 'border-cyan-500/50 text-cyan-400 bg-cyan-500/10' :
-                                    'border-neutral-500/50 text-neutral-400 bg-neutral-500/10'
-                                  }`}>
-                                    {skill.type}
-                                  </span>
-                                </div>
-                                <span className="text-sm text-neutral-500">{skill.level}%</span>
+                              <div className="flex flex-col h-full justify-center">
+                                <span className="font-bold text-lg text-neutral-200 mb-1 flex items-center gap-2">
+                                  <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${category.color}`} />
+                                  {skill.name}
+                                </span>
+                                <span className="text-xs text-neutral-400 leading-snug">{skill.detail}</span>
                               </div>
-                              <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                                <motion.div
-                                  initial={{ width: 0 }}
-                                  animate={{ width: `${skill.level}%` }}
-                                  transition={{ duration: 1, delay: 0.2 + index * 0.1, ease: "easeOut" }}
-                                  className={`h-full bg-gradient-to-r ${category.color}`}
-                                />
-                              </div>
-                              <p className="text-xs text-neutral-500 mt-1 font-mono">{skill.detail}</p>
                             </motion.div>
                           ))}
                         </div>

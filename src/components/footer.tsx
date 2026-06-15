@@ -1,61 +1,49 @@
-"use client"
-
-import Link from "next/link"
-import { Github, Linkedin, Mail, Copy, Check } from "lucide-react"
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-
+'use client';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Check, Copy } from 'lucide-react';
 export function Footer() {
-  const [copied, setCopied] = useState(false)
-
+  const [copied, setCopied] = useState(false);
   const copyEmail = () => {
-    navigator.clipboard.writeText("garvak23@gmail.com")
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
+    navigator.clipboard.writeText('garvak23@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   return (
-    <footer id="contact" className="w-full border-t border-white/10 bg-black/40 backdrop-blur-xl py-12 relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-pink-500/5 blur-[100px] pointer-events-none" />
-
-      <div className="container flex flex-col md:flex-row items-center justify-between gap-8 px-4 md:px-6 relative z-10">
-        <div className="text-center md:text-left">
-          <h3 className="text-2xl font-bold text-white mb-2">Let's build something amazing.</h3>
-          <p className="text-neutral-400">
-            Built by Garv Akolia. Hosted on Vercel.
+    <footer className="border-t border-white/5 bg-[#030305] py-8 px-6 md:px-12 mt-12 relative z-50">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <p className="text-sm font-mono text-white/50">
+            SYSTEMS OPERATIONAL // {new Date().getFullYear()}
           </p>
         </div>
 
-        <div className="flex flex-col items-center md:items-end gap-6">
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://github.com/Garv2003-dot"
-              target="_blank"
-              rel="noreferrer"
-              className="p-3 bg-white/5 rounded-full hover:bg-white/10 hover:text-white hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)] transition-all group"
-            >
-              <Github className="h-5 w-5 text-neutral-400 group-hover:text-white transition-colors" />
-              <span className="sr-only">GitHub</span>
-            </Link>
-            <Link
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noreferrer"
-              className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-400 hover:shadow-[0_0_20px_-5px_rgba(59,130,246,0.3)] transition-all group"
-            >
-              <Linkedin className="h-5 w-5 text-neutral-400 group-hover:text-blue-400 transition-colors" />
-              <span className="sr-only">LinkedIn</span>
-            </Link>
-            <Link
-              href="mailto:garvak23@gmail.com"
-              className="p-3 bg-white/5 rounded-full hover:bg-pink-500/20 hover:text-pink-400 hover:shadow-[0_0_20px_-5px_rgba(236,72,153,0.3)] transition-all group"
-            >
-              <Mail className="h-5 w-5 text-neutral-400 group-hover:text-pink-400 transition-colors" />
-              <span className="sr-only">Email</span>
-            </Link>
-          </div>
+        <p className="text-sm text-white/30">
+          Architected & Engineered by Garv Akolia.
+        </p>
 
+        <div className="flex items-center gap-6">
+          <a
+            href="https://github.com/Garv2003-dot"
+            target="_blank"
+            className="text-white/40 hover:text-white transition-colors"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/garv-akolia-40052a24a?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+            target="_blank"
+            className="text-white/40 hover:text-white transition-colors"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="mailto:garvak23@gmail.com"
+            className="text-white/40 hover:text-white transition-colors"
+          >
+            Mail
+          </a>
           <button
             onClick={copyEmail}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-sm text-neutral-300"
@@ -87,5 +75,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

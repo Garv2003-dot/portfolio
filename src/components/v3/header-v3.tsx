@@ -1,28 +1,40 @@
-"use client"
+'use client';
 
-import { motion, useScroll, AnimatePresence } from "framer-motion"
-import Link from "next/link"
-import { useState } from "react"
-import { Logo } from "@/components/logo"
-import { ContactModal } from "@/components/contact-modal"
+import { motion, useScroll, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { Logo } from '@/components/logo';
+import { ContactModal } from '@/components/contact-modal';
 
 const navLinks = [
-  { name: "Work", href: "#work" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
-]
+  { name: 'Work', href: '#work' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'About', href: '#about' },
+];
 
 export function HeaderV3() {
-  const { scrollY } = useScroll()
-  const [isContactOpen, setIsContactOpen] = useState(false)
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
+  // Force scroll to top on page reload
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
-      <motion.header
-        className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-6 md:px-12 pointer-events-none bg-gradient-to-b from-black/80 to-transparent backdrop-blur-[2px]"
-      >
+      <motion.header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-6 md:px-12 pointer-events-none bg-gradient-to-b from-black/80 to-transparent backdrop-blur-[2px]">
         <div className="pointer-events-auto">
-          <Link href="/" className="block">
+          <Link
+            href="/"
+            className="block"
+            onClick={(e) => {
+              if (window.location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <Logo />
           </Link>
         </div>
@@ -57,9 +69,12 @@ export function HeaderV3() {
 
       <AnimatePresence>
         {isContactOpen && (
-          <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+          <ContactModal
+            isOpen={isContactOpen}
+            onClose={() => setIsContactOpen(false)}
+          />
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }

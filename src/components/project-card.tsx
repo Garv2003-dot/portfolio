@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Project } from "@/data/projects"
@@ -17,7 +18,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       <Link href={`/projects/${project.slug}`} className="block h-full">
         <div className="relative h-[450px] rounded-3xl overflow-hidden border border-white/10 bg-neutral-900/50 backdrop-blur-sm transition-all duration-700 group-hover:border-pink-500/50 group-hover:shadow-[0_0_50px_-12px_rgba(236,72,153,0.3)] group-hover:-translate-y-2">
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10 opacity-80 group-hover:opacity-40 transition-opacity duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10 pointer-events-none" />
           
           {/* Content */}
           <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end">
@@ -33,10 +34,14 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             </div>
           </div>
 
-          {/* Background Image Placeholder */}
-          <div className="absolute inset-0 bg-neutral-800 group-hover:scale-110 transition-transform duration-1000 ease-out">
-             {/* You would put <Image /> here */}
-             <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-900" />
+          {/* Background Image */}
+          <div className="absolute inset-0 bg-white group-hover:scale-110 transition-transform duration-1000 ease-out">
+             <Image 
+               src={project.image} 
+               alt={project.title}
+               fill
+               className="object-cover"
+             />
           </div>
         </div>
       </Link>
